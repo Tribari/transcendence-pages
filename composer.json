@@ -1,0 +1,13 @@
+{
+	"name" : "transcendence-pages",
+	"repositories" : [{
+			"type" : "composer",
+			"url" : "https://packagist.org/"
+		}
+	],
+	"require" : {
+		"twig/twig" : "~1"
+	},
+	"license" : "MIT",
+	"minimum-stability" : "dev"
+}
