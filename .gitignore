@@ -5,3 +5,5 @@
 /public/style/cache/*
 !/cache/index.html
 !/public/style/cache/index.html
+/composer.lock
+/composer.phar
