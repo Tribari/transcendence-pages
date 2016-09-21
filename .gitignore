@@ -1,7 +1,7 @@
 /.buildpath
 .project
 /vendor
-/cache
+/cache/*
+/public/style/cache/*
 !/cache/index.html
-!index.html
-!.gitignore
+!/public/style/cache/index.html
