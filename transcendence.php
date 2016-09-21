@@ -42,6 +42,9 @@ try{
 }
 
 
+$twig_vars 	= array('cssfile' => $css_file_name, 'sessionid' => $sessionid );
+
+
 $url 		= $_SERVER["REQUEST_URI"];
 $url		= substr($url, 1);
 
@@ -55,7 +58,7 @@ if($page_end == ''){
 $html = dirname(__FILE__).'/pages/'.$url.'.html';
 
 if(file_exists($html)){
-	echo $twig->render($url.'.html', array('cssfile' => $css_file_name, 'sessionid' => $sessionid ));
+	echo $twig->render($url.'.html', $twig_vars );
 }else{
-	echo $twig->render('404.html', array('cssfile' => $css_file_name, 'sessionid' => $sessionid ));
+	echo $twig->render('404.html', $twig_vars );
 }
