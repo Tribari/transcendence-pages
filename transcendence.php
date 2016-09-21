@@ -17,8 +17,8 @@ require_once __DIR__.'/vendor/autoload.php';
 try{
 	$less_files 	= array( dirname(__FILE__).'/public/style/less/style.less' => '/style/less/' );
 	$options 		= array( 'cache_dir' => dirname(__FILE__).'/public/style/cache' );
-	$variables 		= array( 'width' => '100px' );
-	$css_file_name 	= 'style/cache/'. Less_Cache::Get( $less_files, $options, $variables );
+	$variables 		= array(); //eg. array( 'width' => '100px' );
+	$css_file_name 	= '/style/cache/'. Less_Cache::Get( $less_files, $options, $variables );
 }catch(Exception $e){
 	$error_message 	= $e->getMessage();
 }
@@ -42,17 +42,20 @@ try{
 }
 
 
-$url = $_SERVER["REQUEST_URI"];
-$url = explode("/", $url);
-$page = end($url);
+$url 		= $_SERVER["REQUEST_URI"];
+$url		= substr($url, 1);
 
-if($page == ''){
-	echo $twig->render('index.html', array('cssfile' => $css_file_name, 'sessionid' => $sessionid ));
+$page_url	= explode("/",$url);
+$page_end 	= end($page_url);
+
+if($page_end == ''){
+	$url = $url."index";
+}
+
+$html = dirname(__FILE__).'/pages/'.$url.'.html';
+
+if(file_exists($html)){
+	echo $twig->render($url.'.html', array('cssfile' => $css_file_name, 'sessionid' => $sessionid ));
 }else{
-	$html = dirname(__FILE__).'/../pages/'.$page.'.html';
-	if(file_exists($html)){
-		echo $twig->render($spage.'.html', array('cssfile' => $css_file_name, 'sessionid' => $sessionid ));
-	}else{
-		echo $twig->render('404.html', array('cssfile' => $css_file_name, 'sessionid' => $sessionid ));
-	}
+	echo $twig->render('404.html', array('cssfile' => $css_file_name, 'sessionid' => $sessionid ));
 }
