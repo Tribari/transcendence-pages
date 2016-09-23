@@ -12,6 +12,8 @@ $lessfiles = array(
 
 $less_vars = array();
 
+$twig_vars = array();
 
+$twig_cache = false;
 
-echo start($lessfiles, $less_vars);
+echo start($lessfiles, $less_vars, $twig_vars, $twig_cache);

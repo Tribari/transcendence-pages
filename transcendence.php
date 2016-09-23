@@ -3,18 +3,13 @@ session_start();
 $sessionid = session_id();
 
 /*
- * Loading the configuration
- */
-require_once 'config/general.php';
-
-/*
  * Loading the libraries
  */
 require_once __DIR__.'/vendor/autoload.php';
 
 
 
-function start( $less_files = array(), $less_vars = array() ) {
+function start( $less_files = array(), $less_vars = array(), $twig_vars = array(), $twig_cache = false ) {
 
 	// LESS Compiler
 	try{
@@ -33,7 +28,7 @@ function start( $less_files = array(), $less_vars = array() ) {
 		$loader->addPath('../templates', 'templates');
 		$loader->addPath('../partials', 'partials');
 		
-		if($TWIG_CACHE){
+		if($twig_cache){
 			$twig = new Twig_Environment($loader, array('cache' => '../cache',));
 		}else{
 			$twig = new Twig_Environment($loader);
@@ -43,7 +38,10 @@ function start( $less_files = array(), $less_vars = array() ) {
 	}
 	
 	
-	$twig_vars 	= array('cssfile' => $css_file_name, 'sessionid' => $sessionid );
+	//$twig_vars 	= array('cssfile' => $css_file_name, 'sessionid' => $sessionid );
+	
+	$twig_vars['cssfile'] 		= $css_file_name;
+	$twig_vars['sessionid'] 	= $sessionid;
 	
 	
 	$url 		= $_SERVER["REQUEST_URI"];
