@@ -1,6 +1,5 @@
 <?php
 session_start();
-$sessionid = session_id();
 
 /*
  * Loading the libraries
@@ -10,6 +9,9 @@ require_once __DIR__.'/vendor/autoload.php';
 
 
 function start( $less_files = array(), $less_vars = array(), $twig_vars = array(), $twig_cache = false ) {
+	
+	$error_message 	= "";
+	$sessionid 		= session_id();
 
 	// LESS Compiler
 	try{
